@@ -6,19 +6,17 @@ import java.util.Stack;
 public class AutomatoPilha {
 	
 	GLC glc;
-	String[][] m;
+	
 	Stack<Character> pilha;
 	ArrayList<String> qLaco;
 	
 	public AutomatoPilha(GLC glc){
-		this.glc = glc;
-		m = new String[glc.getVariaveis().size()][glc.getTerminais().size()];
+		this.glc = glc;		
 		pilha = new Stack<Character>();
 		qLaco = new ArrayList<String>();
 		
 		construirAutomatoPilha();
-		imprimeQLaco();
-		//construirTabelaM();
+		//imprimeQLaco();
 	}
 	
 	private void construirAutomatoPilha(){
@@ -40,11 +38,7 @@ public class AutomatoPilha {
 			
 			qLaco.add(producao);			
 		}
-	}
-	
-	private void construirTabelaM(){
-		String primeiro;
-	}
+	}	
 	
 	public void imprimeQLaco(){
 		for (String s : qLaco){
