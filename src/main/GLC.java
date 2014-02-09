@@ -1,17 +1,20 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GLC {
 	
 	ArrayList<String> producoes;
 	ArrayList<Character> variaveis;
 	ArrayList<Character> terminais;
+	HashMap<Character, String> hashProducoes;
 	
 	public GLC(String producao){
 		producoes = new ArrayList<String>();
 		variaveis = new ArrayList<Character>();
 		terminais = new ArrayList<Character>();
+		hashProducoes = new HashMap<Character, String>();
 		
 		definirVariaveisETerminais(producao);
 		//imprime();
@@ -26,9 +29,14 @@ public class GLC {
 			producoes.add(s);
 			
 			if (variaveis.isEmpty())
-				variaveis.add(s.charAt(0));
+				variaveis.add(s.charAt(0));			
 			else if (!variaveis.contains(s.charAt(0)))
-				variaveis.add(s.charAt(0));
+				variaveis.add(s.charAt(0));			
+			
+			if (hashProducoes.containsKey(s.charAt(0)))
+				hashProducoes.put(s.charAt(0), hashProducoes.get(s.charAt(0)) + "," + s.substring(4).trim());
+			else
+				hashProducoes.put(s.charAt(0), s.substring(4).trim());
 		}
 		
 		//Checa quais são os terminais contidos na produção
@@ -59,6 +67,10 @@ public class GLC {
 	
 	public ArrayList<String> getProducoes() {
 		return producoes;
+	}
+	
+	public HashMap<Character, String> getHashProducoes() {
+		return hashProducoes;
 	}
 	
 	private void imprime(){

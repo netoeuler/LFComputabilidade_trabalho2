@@ -38,7 +38,11 @@ public class AutomatoPilha {
 			
 			qLaco.add(producao);			
 		}
-	}	
+	}
+	
+	public void lerExpressao(){
+		
+	}
 	
 	public void imprimeQLaco(){
 		for (String s : qLaco){
