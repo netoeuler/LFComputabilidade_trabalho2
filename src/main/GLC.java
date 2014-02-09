@@ -5,16 +5,16 @@ import java.util.HashMap;
 
 public class GLC {
 	
-	ArrayList<String> producoes;
-	ArrayList<Character> variaveis;
-	ArrayList<Character> terminais;
-	HashMap<Character, String> hashProducoes;
+	private ArrayList<String> producoes;
+	private ArrayList<Character> variaveis;
+	private ArrayList<Character> terminais;
+	private HashMap<Character, String> hashProducoes;
 	
 	public GLC(String producao){
-		producoes = new ArrayList<String>();
-		variaveis = new ArrayList<Character>();
-		terminais = new ArrayList<Character>();
-		hashProducoes = new HashMap<Character, String>();
+		this.producoes = new ArrayList<String>();
+		this.variaveis = new ArrayList<Character>();
+		this.terminais = new ArrayList<Character>();
+		this.hashProducoes = new HashMap<Character, String>();
 		
 		definirVariaveisETerminais(producao);
 		//imprime();

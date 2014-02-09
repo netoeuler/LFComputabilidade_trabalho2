@@ -1,24 +1,22 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class TabelaM {
 	
-	GLC glc;
-	String[][] tabela;
-	HashMap<String, String> primeiro;
-	HashMap<String, String> sequencia;
+	private GLC glc;
+	private String[][] tabela;
+	private HashMap<String, String> primeiro;
+	private HashMap<String, String> sequencia;
 	
 	public TabelaM(GLC glc){
 		this.glc = glc;
-		tabela = new String[glc.getVariaveis().size()][glc.getTerminais().size()];
-		primeiro = new HashMap<String, String>();
-		sequencia = new HashMap<String, String>();
+		this.tabela = new String[glc.getVariaveis().size()][glc.getTerminais().size()];
+		this.primeiro = new HashMap<String, String>();
+		this.sequencia = new HashMap<String, String>();
 		
 		construirTabelaM();
-		imprimeTabela();
+		//imprimeTabela();
 	}	
 	
 	private void construirTabelaM(){
@@ -82,14 +80,10 @@ public class TabelaM {
 		
 		boolean houveAlteracao = false;
 		
-		while (!houveAlteracao){			
+		while (!houveAlteracao){
 			for (String prod : glc.getProducoes()){
 				char A = prod.charAt(0);
 				String w = prod.substring(4).trim();
-				
-				//Apenas tratar as produções com 1 elemento que não seja terminal
-				if (w.length() > 1)
-					continue;
 							
 				int k = 0;
 				boolean Continue = true;
@@ -235,6 +229,10 @@ public class TabelaM {
 		return false;
 	}
 	
+	public String[][] getTabela() {
+		return tabela;
+	}
+	
 	private void imprimeTabela(){
 		int m = glc.getVariaveis().size();
 		int t = glc.getTerminais().size();
@@ -255,19 +253,3 @@ public class TabelaM {
 	}
 
 }
-
-/*for (int s = 0 ; s < sequencia.length() ; s++){
-char a = sequencia.charAt(s);
-if (isTerminal(a))
-	primeiro[glc.getTerminais().indexOf(a)] = a+"";
-else {
-		
-}				
-}*/
-
-/*if (sequencia.contains("E"))
-continue;
-else if (glc.getTerminais().contains( sequencia.charAt(0) )){
-int indT = glc.getTerminais().indexOf(sequencia.charAt(0));
-tabela[indM][indT] = sequencia;
-}*/
