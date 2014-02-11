@@ -40,6 +40,13 @@ public class AutomatoPilha {
 		}
 	}
 	
+	/**
+	 * Checa a validade da expressão passada como
+	 * parâmetro e retorna 1 se a expressão for válida
+	 * e 0 se não for.
+	 * @param expressao
+	 * @return
+	 */
 	public int checaValidadeExpressao(String expressao){
 		char varInicial = glc.getVariaveis().get(0);
 		expressao = expressao+"$";

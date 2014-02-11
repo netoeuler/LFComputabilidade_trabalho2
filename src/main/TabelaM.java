@@ -23,10 +23,10 @@ public class TabelaM {
 		construirConjuntoPrimeiro();
 		construirConjuntoSequencia();
 		
-		for (String p : glc.getProducoes()){		
+		for (String p : glc.getProducoes()){			
 			
-			char A = p.charAt(0);
-			String w = p.substring(4).trim();
+			char A = p.charAt(0);			
+			String w = getApenasExpressao(p);
 			String priW = primeiro.get(w);			
 			
 			for (int i = 0 ; i < priW.length() ; i++){
@@ -69,7 +69,7 @@ public class TabelaM {
 			primeiro.put(a+"", a+"");
 		
 		for (String prod : glc.getProducoes()){
-			if (prod.substring(4).trim().equals("E"))
+			if (getApenasExpressao(prod).equals("E"))
 				primeiro.put("E", "E");
 		}
 		
@@ -83,7 +83,7 @@ public class TabelaM {
 		while (!houveAlteracao){
 			for (String prod : glc.getProducoes()){
 				char A = prod.charAt(0);
-				String w = prod.substring(4).trim();
+				String w = getApenasExpressao(prod);
 							
 				int k = 0;
 				boolean Continue = true;
@@ -118,7 +118,7 @@ public class TabelaM {
 		//Caso 3
 		//Primeiro(w) | w -> X_1X_2...X_n
 		for (String prod : glc.getProducoes()){
-			String w = prod.substring(4).trim();
+			String w = getApenasExpressao(prod);
 			
 			//Se só contém 1 elemento, não é uma cadeia
 			if (w.length() == 1)
@@ -143,7 +143,6 @@ public class TabelaM {
 					String seq = primeiro.get(w.charAt(i)+"").replace("E", " ").trim();
 					String primeiroW = primeiro.get(w);
 					String acrescentar = getCadeiaSemRepeticao(primeiroW + seq);
-					//primeiro.put(w, primeiroW + seq);
 					primeiro.put(w, acrescentar);
 				}
 			}
@@ -152,7 +151,6 @@ public class TabelaM {
 				String seq = primeiro.get(w)+"E";
 				String primeiroW = primeiro.get(w);
 				String acrescentar = getCadeiaSemRepeticao(primeiroW + seq);
-				//primeiro.put(w, primeiroW + seq);
 				primeiro.put(w, acrescentar);
 			}
 		}		
@@ -174,7 +172,7 @@ public class TabelaM {
 			//for cada produção A -> X_1X_2...X_n do
 			for (String prod : glc.getProducoes()){
 				char A = prod.charAt(0);
-				prod = prod.substring(4).trim();
+				prod = getApenasExpressao(prod);
 				if (prod.length() == 1)
 					continue;
 				
@@ -198,6 +196,13 @@ public class TabelaM {
 		}		
 	}
 	
+	/**
+	 * Retorna o conjunto primeiro de uma cadeia.
+	 * Se houver mais de um não-terminal na expressão, faz a
+	 * união entre os conjuntos primeiro.
+	 * @param w
+	 * @return
+	 */
 	private String getPrimeiroDaCadeia(String w){
 		if (w.length() == 1)
 			return w;
@@ -210,6 +215,12 @@ public class TabelaM {
 		return resultado;
 	}
 	
+	/**
+	 * Formata a cadeia pra evitar que haja repetição
+	 * de elementos nela.
+	 * @param cadeia
+	 * @return
+	 */
 	private String getCadeiaSemRepeticao(String cadeia){
 		String seq = "";
 		
@@ -227,6 +238,20 @@ public class TabelaM {
 				return true;
 		
 		return false;
+	}
+	
+	/**
+	 * Retorna apenas a expressão da produção,
+	 * ou seja, o que tem vier depois de ->
+	 * @param exp
+	 * @return
+	 */
+	private String getApenasExpressao(String exp){
+		int ini = 0;
+		if (exp.charAt(exp.indexOf('-')+1) == '>')
+			ini = exp.indexOf('-')+2;
+		
+		return exp.substring(ini).trim();
 	}
 	
 	public String[][] getTabela() {

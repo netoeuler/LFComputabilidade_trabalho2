@@ -7,14 +7,12 @@ public class GLC {
 	
 	private ArrayList<String> producoes;
 	private ArrayList<Character> variaveis;
-	private ArrayList<Character> terminais;
-	private HashMap<Character, String> hashProducoes;
+	private ArrayList<Character> terminais;	
 	
 	public GLC(String producao){
 		this.producoes = new ArrayList<String>();
 		this.variaveis = new ArrayList<Character>();
-		this.terminais = new ArrayList<Character>();
-		this.hashProducoes = new HashMap<Character, String>();
+		this.terminais = new ArrayList<Character>();		
 		
 		definirVariaveisETerminais(producao);
 		//imprime();
@@ -32,11 +30,6 @@ public class GLC {
 				variaveis.add(s.charAt(0));			
 			else if (!variaveis.contains(s.charAt(0)))
 				variaveis.add(s.charAt(0));			
-			
-			if (hashProducoes.containsKey(s.charAt(0)))
-				hashProducoes.put(s.charAt(0), hashProducoes.get(s.charAt(0)) + "," + s.substring(4).trim());
-			else
-				hashProducoes.put(s.charAt(0), s.substring(4).trim());
 		}
 		
 		//Checa quais são os terminais contidos na produção
@@ -67,11 +60,7 @@ public class GLC {
 	
 	public ArrayList<String> getProducoes() {
 		return producoes;
-	}
-	
-	public HashMap<Character, String> getHashProducoes() {
-		return hashProducoes;
-	}
+	}	
 	
 	private void imprime(){
 		for (Character s : variaveis){
